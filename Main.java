@@ -18,6 +18,7 @@ public class Main {
     public static char right_lower_corner = '┘';
     public static Object[] blocks = {new Lblock()};
     public static int[][] board = {
+                                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 0
                                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 1
                                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 2
                                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 3
@@ -36,8 +37,7 @@ public class Main {
                                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 16
                                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 17
                                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 18
-                                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 19
-                                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}  // 20
+                                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}  // 19
                                 };
     
     public static void main (String [] args) throws Exception {
@@ -84,6 +84,7 @@ public class Main {
                     System.out.print("  ");
                 } else if (line[k] == 1) {
                     System.out.print("[]");
+                    out.printf(null, null, blocks)
                 }
             }
             out.println("|");
@@ -97,7 +98,7 @@ public class Main {
         draw_board(10, 20);
         update_board();
         for (int i = 0; i < blocks.length; i++) {
-            if (((Lblock) blocks[i]).relativey >= (18 - 2)) {
+            if (((Lblock) blocks[i]).relativey >= (20 - ((Lblock) blocks[i]).get_dimensions('y') - 1)) {
                 out.println(((Lblock) blocks[i]).get_dimensions('y'));
                 ((Lblock) blocks[i]).deactivate();
             }

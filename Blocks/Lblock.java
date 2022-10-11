@@ -104,7 +104,6 @@ public class Lblock {
     } else if (x_or_y == 'y') {
       return height;
     } else {
-      System.out.println(x_or_y);
       return 0;
     }
   }
