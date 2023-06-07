@@ -39,17 +39,13 @@ public class Main {
                                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 18
                                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}  // 19
                                 };
-    
+
     public static void main (String [] args) throws Exception {
         Keylistener.keylisten();
         draw_board(10, 20);
         update_board();
         while (true) {
             tick++;
-            if (Lblock.change_orentation()) {
-                draw_board(10, 20);
-                update_board();
-            }
             if (tick == 1999999999L) {
                 gameloop();
             } else if (tick > 1999999999L) {
@@ -59,16 +55,10 @@ public class Main {
     }
 
     public static void update_board () {
+        // clears the board
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 board[i][j] = 0;
-            }
-        }
-        for (int i = 0; i < blocks.length; i++) {
-            int[][] coords = ((Lblock) blocks[i]).get_coords();
-            for (int j = 0; j < 4; j++) {
-                int[] set = coords[j];
-                board[set[1]][set[0]] = 1;
             }
         }
     }
@@ -86,7 +76,6 @@ public class Main {
                     System.out.print("  ");
                 } else if (line[k] == 1) {
                     System.out.print("[]");
-                    out.printf(null, null, blocks); 
                 }
             }
             out.println("|");
@@ -99,18 +88,8 @@ public class Main {
     public static void gameloop () throws Exception {
         draw_board(10, 20);
         update_board();
-        for (int i = 0; i < blocks.length; i++) {
-            if (((Lblock) blocks[i]).relativey >= (20 - ((Lblock) blocks[i]).get_dimensions('y') - 1)) {
-                out.println(((Lblock) blocks[i]).get_dimensions('y'));
-                ((Lblock) blocks[i]).deactivate();
-            }
-            if (((Lblock) blocks[i]).is_active() == true) {
-                ((Lblock) blocks[i]).fall(); 
-            }
-        }
-    }
 
-   
+    }
 }
 
 

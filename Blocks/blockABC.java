@@ -2,19 +2,18 @@ package Blocks;
 
 import KeyListener.Keylistener;
 
-public class blockABC {
-  public static int width;
-  public static int height;
-  public static int orentation = 0;
-  public static int relativex = 0;
-  public int relativey = 0;
-  public boolean active = true;
+public class BlockABC {
+  private int width;
+  private int height;
+  private int orentation;
+  private int relativex;
+  private int relativey;
+  private boolean active = true;
   // constructor
-  public Lblock() {
-    
+  public BlockABC() {
   }
 
-  public static boolean change_orentation () throws Exception {
+  public boolean change_orentation () throws Exception {
     int key = Keylistener.key;
     if (key == 1) {
       orentation = 0;
