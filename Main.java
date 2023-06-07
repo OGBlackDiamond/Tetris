@@ -42,6 +42,8 @@ public class Main {
     
     public static void main (String [] args) throws Exception {
         Keylistener.keylisten();
+        draw_board(10, 20);
+        update_board();
         while (true) {
             tick++;
             if (Lblock.change_orentation()) {
