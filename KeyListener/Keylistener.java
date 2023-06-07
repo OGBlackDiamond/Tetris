@@ -28,11 +28,7 @@ public class Keylistener {
                     key = 6;
                 }
                 get_key(key);
-
             } 
-
-
-
         });
 
         myJFrame.setVisible(true);

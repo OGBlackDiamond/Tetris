@@ -84,7 +84,7 @@ public class Main {
                     System.out.print("  ");
                 } else if (line[k] == 1) {
                     System.out.print("[]");
-                    out.printf(null, null, blocks)
+                    out.printf(null, null, blocks); 
                 }
             }
             out.println("|");
