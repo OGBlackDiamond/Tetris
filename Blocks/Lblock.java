@@ -1,8 +1,5 @@
 package Blocks;
 
-import Blocks.BlockABC;
-import KeyListener.Keylistener;
-
 /*
 
 L block can be printed in 4 ways:
@@ -25,9 +22,15 @@ L block can be printed in 4 ways:
 
 */
 public class Lblock extends BlockABC{
-  // constructor
-  public Lblock() {
 
-  }
+    // constructor
+    public Lblock() {
+
+    }
+
+    @Override
+    public void switchPosition() {
+        // Auto-generated method stub
+    }
 
 }

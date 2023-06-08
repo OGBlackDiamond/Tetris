@@ -1,90 +1,38 @@
 package Blocks;
 
 import KeyListener.Keylistener;
+/**
+ * This class will be extended by multiple block classes and will act as a framework for all of the block types to run.
+ * This does not have a constructor, as it is an abstract class.
+ */
+public abstract class BlockABC {
+    /** This variable contains a coordinate value for the block relative to the board */
+    protected int xpos, ypos;
+    
+    /** This will contain the location of the parts reletive to the whole body of the block */
+    protected int[][] partCoords = {{0, 0}, {0 ,1}, {1, 0}, {1, 1}};
 
-public class BlockABC {
-  private int width;
-  private int height;
-  private int orentation;
-  private int relativex;
-  private int relativey;
-  private boolean active = true;
-  // constructor
-  public BlockABC() {
-  }
+    /** This variable will store the last key that was pressed on the keyboard */
+    protected int keyPressed;
 
-  public boolean change_orentation () throws Exception {
-    int key = Keylistener.key;
-    if (key == 1) {
-      orentation = 0;
-      width = 2;
-      height = 1;
-    } else if (key == 2) {
-      orentation = 1;
-      width = 1;
-      height = 2;
-    } else if (key == 3) {
-      orentation = 2;
-      width = 2;
-      height = 1;
-    } else if (key == 4) {
-      orentation = 3;
-      width = 1;
-      height = 2;
-    } else if (key == 5) {
-      relativex--;
-    } else if (key == 6) {
-      relativex++;
-    } else {
-      return false;
+    /** 
+     * This will change the position of the current block.
+     * Method is abstract because the position to swtich to depends on the current block.
+    */
+    public abstract void switchPosition();
+
+    /** Causes the block to fall */
+    public void fall() {
+        ypos--;
     }
 
-    key = 0;
-    Keylistener.key = 0;
-    return true;
-  }
-
-
-
-  public int[][] get_coords () {
-    int[][] coords1 = {{0 + relativex, 0 + relativey}, {1 + relativex, 0 + relativey}, {2 + relativex, 0 + relativey}, {0 + relativex, 1 + relativey}};
-    int[][] coords2 = {{0 + relativex, 0 + relativey}, {1 + relativex, 0 + relativey}, {1 + relativex, 1 + relativey}, {1 + relativex, 2 + relativey}};
-    int[][] coords3 = {{2 + relativex, 0 + relativey}, {2 + relativex, 1 + relativey}, {1 + relativex, 1 + relativey}, {0 + relativex, 1 + relativey}};
-    int[][] coords4 = {{0 + relativex, 0 + relativey}, {0 + relativex, 1 + relativey}, {0 + relativex, 2 + relativey}, {1 + relativex, 2 + relativey}};
-    if (orentation == 0) {
-      return coords1;
-    } else if (orentation == 1) {
-      return coords2;
-    } else if (orentation == 2) {
-      return coords3;
-    } else {
-      return coords4;
+    /** Gets the current key that was pressed */
+    protected void setKey() {
+        keyPressed = Keylistener.key;
     }
-  }
 
-
-
-  public void fall () {
-    relativey++;
-  }
-
-  public boolean is_active () {
-    return active;
-  }
-
-  public void deactivate () {
-    active = false;
-  }
-
-  public int get_dimensions(char x_or_y) {
-    if (x_or_y == 'x') {
-      return width;
-    } else if (x_or_y == 'y') {
-      return height;
-    } else {
-      System.out.println(x_or_y);
-      return 0;
+    /** Returns the last key that was pressed */
+    protected int getKey() {
+        return keyPressed;
     }
-  }
-
 }
