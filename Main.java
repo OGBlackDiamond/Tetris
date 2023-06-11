@@ -10,11 +10,11 @@ import Sub.*;
 public class Main {
     /** The current tick the game runs on. */
     private long tick = 0L;
-    /** Dimention variables for the board. */
+    /** Dimension variables for the board. */
     private int boardWidth, boardHeight;
     /** Contains the special characters that are used for the corners of the board. */
-    private char left_upper_corner = '┌', left_lower_corner = '└', right_upper_corner = '┐', right_lower_corner = '┘';
-    private Object[] blocks = {};
+    private char leftUpperCorner = '┌', leftLowerCorner = '└', rightUpperCorner = '┐', rightLowerCorner = '┘';
+    private BlockABC[] blocks = {new Lblock()};
     private int[][] board;
 
     /** Starts the game with the board dimensions given. */
@@ -37,20 +37,36 @@ public class Main {
     }
 
     /** Handles all of the action that happens whenever the gameloop runs. */
-    public void gameloop () throws Exception {
-        draw_board();
-        update_board();
+    public void gameloop() {
+        blocksLoop();
+        drawBoard();
+        zeroBoard();
+        updateBoard();
+    }
+
+    /* Returns the board to a state of zero */
+    private void zeroBoard() {
+        // clears the board
+        for (int rows = 0; rows < boardHeight; rows++) {
+            for (int columns = 0; columns < boardWidth; columns++) {
+                board[rows][columns] = 0;
+            }
+        }
     }
 
     /** Handles all of the logic with the board. */
-    private void update_board () {
-        zeroBoard();
+    private void updateBoard () {
+        for (int rows = 0; rows < boardHeight; rows++) {
+            for (int columns = 0; columns < boardWidth; columns++) {
+                mapPieces(rows, columns);
+            }
+        }
     }
 
     /** Draws the board */
-    private void draw_board () {
+    private void drawBoard () {
         // prints the top layer
-        out.print(left_upper_corner); for (int i = 0; i <= boardWidth - 2; i++) { out.print("--"); } out.println(right_upper_corner);
+        out.print(leftUpperCorner); for (int i = 0; i <= boardWidth - 2; i++) { out.print("--"); } out.println(rightUpperCorner);
         // prints middle layers
         for (int rows = 0; rows < boardHeight; rows++) {
             out.print("|");
@@ -66,21 +82,52 @@ public class Main {
             out.println("|");
         }
         // prints bottom layer
-        out.print(left_lower_corner); for (int i = 0; i <= boardWidth - 2; i++) { out.print("--"); } out.println(right_lower_corner);
+        out.print(leftLowerCorner); for (int i = 0; i <= boardWidth - 2; i++) { out.print("--"); } out.println(rightLowerCorner);
     }
 
-    /* Returns the board to a state of zero */
-    private void zeroBoard() {
-        // clears the board
-        for (int rows = 0; rows < boardHeight; rows++) {
-            for (int columns = 0; columns < boardWidth; columns++) {
-                board[rows][columns] = 0;
+    /**
+     * Runs the loop for all the blocks present
+     */
+    private void blocksLoop() {
+        for (BlockABC block: blocks) {
+            block.blockLoop();
+        }
+    }
+
+    /** 
+    * Checks if there is a piece of a block in the current space, if there is, mark the appropriate spaces as populated.
+    *
+    * @param row - the row to check
+    * @param column - the column to check
+    */
+    private void mapPieces(int row, int column) {
+        // loops through the array of blocks
+        for (BlockABC block : blocks) {
+            // gets the coordinates of the current block
+            int[] coords = block.getCoords();
+            // checks if the block exists in the row or column
+            if (coords[0] == row && coords[1] == column) {
+                mapAdjacentPieces(block, coords);
             }
         }
     }
 
     /**
+     * Maps the pieces adjacent to the specified block at its current position.
+     * 
+     * @param block - the block to map
+     * @param blockCoords - the array of coordinates for the specified block
+     */
+    private void mapAdjacentPieces(BlockABC block, int[] blockCoords) {
+        int[][] partCoords = block.getAdjacentCoords();
+        for (int[] part: partCoords) {
+            board[blockCoords[0] + part[0]][blockCoords[1] + part[1]] = 1;
+        }
+    }
+
+    /**
      * Handles all of the timing for how often the game should run
+     * 
      * @return boolean - whether or not the gameloop should run
      */
     private boolean getTick() {
@@ -92,5 +139,3 @@ public class Main {
         return false;
     }
 }
-
-

@@ -15,38 +15,39 @@ public class Keylistener {
             public void keyPressed(KeyEvent e) {
 
                 int keyCode = e.getKeyCode();
-                key = 0;
+                key = 6;
                 switch (keyCode) {
                     case KeyEvent.VK_W:
-                        key = 1;
-                        break;
-                    case KeyEvent.VK_A:
-                        key = 2;
-                        break;
-                    case KeyEvent.VK_S:
-                        key = 3;
-                        break;
-                    case KeyEvent.VK_D:
-                        key = 4;
-                        break;
-                    case KeyEvent.VK_LEFT:
-                        key = 5;
-                        break;
-                    case KeyEvent.VK_RIGHT:
-                        key = 6;
-                        break;
-                    default:
                         key = 0;
                         break;
+                    case KeyEvent.VK_A:
+                        key = 1;
+                        break;
+                    case KeyEvent.VK_S:
+                        key = 2;
+                        break;
+                    case KeyEvent.VK_D:
+                        key = 3;
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        key = 4;
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        key = 5;
+                        break;
+                    default:
+                        key = 6;
+                        break;
                 }
-                get_key(key);
+                getKey(key);
             }
+
         });
 
         myJFrame.setVisible(true);
     }
 
-    public static int get_key(int lkey) {
+    public static int getKey(int lkey) {
         key = lkey;
         return key;
     }
