@@ -66,6 +66,7 @@ public abstract class BlockABC {
     }
 
     public void blockLoop() {
+        fall();
         getKey();
         switchOrientation();
         shift();
