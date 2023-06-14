@@ -39,6 +39,10 @@ public class Main {
         board.updateBoard();
     }
 
+    public void fall() {
+        blocks[0].fall();
+    }
+
     /**
      * Runs the loop for all the blocks present
      */

@@ -13,6 +13,7 @@ public class TetrisRunner {
             }
             if (tetris.tick()) {
                 tetris.gameloop();
+                tetris.fall();
             }
         }
     }
