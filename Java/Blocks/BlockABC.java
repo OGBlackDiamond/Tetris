@@ -23,11 +23,6 @@ public abstract class BlockABC {
         keyPressed = Keylistener.key;
     }
 
-    /** Causes the block to fall */
-    public void fall() {
-        ypos++;
-    }
-
     /** 
      * This will change the position of the current block.
      * Method is abstract because the position to swtich to depends on the current block.
@@ -65,8 +60,12 @@ public abstract class BlockABC {
         return partCoords;
     }
 
+    /** Causes the block to fall */
+    public void fall() {
+        ypos++;
+    }
+
     public void blockLoop() {
-        fall();
         getKey();
         switchOrientation();
         shift();
