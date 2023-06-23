@@ -1,6 +1,8 @@
+package TetJava;
+
 import static java.lang.System.*;
 
-import Blocks.BlockABC;
+import TetJava.Blocks.BlockABC;
 
 public class Board {
     /** Dimension variables for the board. */

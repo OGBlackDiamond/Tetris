@@ -1,6 +1,6 @@
-package Blocks;
+package TetJava.Blocks;
 
-import KeyListener.Keylistener;
+import TetJava.KeyListener.Keylistener;
 /**
  * This class will be extended by multiple block classes and will act as a framework for all of the block types to run.
  * This does not have a constructor, as it is an abstract class.
@@ -69,5 +69,6 @@ public abstract class BlockABC {
         getKey();
         switchOrientation();
         shift();
+        Keylistener.key = 6;
     }
 }

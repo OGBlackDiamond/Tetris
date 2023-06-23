@@ -1,17 +1,17 @@
-package KeyListener;
+package TetJava.KeyListener;
 
 import javax.swing.JFrame;
+
+import TetJava.Main;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class Keylistener {
     public static int key = 0;
-    public static void keylisten () throws Exception {
+    public static void keylisten (Main tetris) throws Exception {
         JFrame myJFrame = new JFrame();
-
         myJFrame.addKeyListener(new KeyAdapter() {
-
             public void keyPressed(KeyEvent e) {
 
                 int keyCode = e.getKeyCode();
@@ -40,7 +40,9 @@ public class Keylistener {
                         break;
                 }
                 getKey(key);
+                tetris.gameloop();
             }
+
 
         });
 

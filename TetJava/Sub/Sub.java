@@ -1,4 +1,4 @@
-package Sub;
+package TetJava.Sub;
 
 /** A class that contains methods to support the main program */
 public class Sub {

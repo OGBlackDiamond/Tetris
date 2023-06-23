@@ -1,4 +1,4 @@
-package Blocks;
+package TetJava.Blocks;
 
 /*
 

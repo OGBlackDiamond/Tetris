@@ -1,11 +1,9 @@
+package TetJava;
 /* 
 Tetris game in console
 author - Caden Feller
 */
-import static java.lang.System.*;
-
-import Blocks.*;
-import Sub.*;
+import TetJava.Blocks.*;
 
 public class Main {
     /** The current tick the game runs on. */
