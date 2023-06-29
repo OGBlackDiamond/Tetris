@@ -19,44 +19,63 @@ public abstract class BlockABC {
     protected int keyPressed;
 
     /** This will contain the farthest right x coordinate reletive to the block */
-    protected int farthestFromBlock = 0;
+    protected int farthestFromBlockx = 0;
+
+    /** This will contain the farthest right y coordinate reletive to the block */
+    protected int farthestFromBlocky = 0;
+
 
     /** Returns the last key that was pressed */
     private void getKey() {
         keyPressed = Keylistener.key;
     }
 
-    /** 
-     * This will change the position of the current block.
-     * Method is abstract because the position to swtich to depends on the current block.
-    */
+    /** This will change the position of the current block */
     private void switchOrientation() {
         // changes the orientation
         partCoords = keyPressed < 4 ? orientations[keyPressed] : partCoords;
 
-        // every time the orentation is changed, the farthest part from the block is calculated
-        farthestFromBlock = 0;
+        // every time the orentation is changed, the farthest part from the block is calculated on the x axis
+        farthestFromBlockx = 0;
         for (int[] part: partCoords) {
-            if (part[1] > farthestFromBlock) {
-                farthestFromBlock = part[1];
+            if (part[1] > farthestFromBlockx) {
+                farthestFromBlockx = part[1];
+            }
+        }
+
+        // every time the orentation is changed, the farthest part from the block is calculated on the y axis
+        farthestFromBlocky = 0;
+        for (int[] part: partCoords) {
+            if (part[0] > farthestFromBlocky) {
+                farthestFromBlocky = part[0];
             }
         }
     }
 
+    /**
+     * Shifts the block in the specified direction (keyboard input)
+     *
+     * @param boardWidth - the width of the board
+     */
     private void shift(int boardWidth) {
+        // shifts the block in the specified direction
         switch (keyPressed) {
             case 4:
-                if (xpos > 0) {
-                    xpos--;
-                }
+                xpos--;
                 break;
             case 5:
                 xpos++;
                 break;
         }
 
-        while (xpos + farthestFromBlock >= boardWidth - 1) {
+        // constantly shoves the piece back into the board if it is out of bounds
+        while (xpos + farthestFromBlockx >= boardWidth - 1) {
             xpos--;
+        }
+
+        // constantly shoves the piece back into the board if it is out of bounds
+        while (xpos < 0 ) {
+            xpos++;
         }
     }
 
@@ -79,10 +98,16 @@ public abstract class BlockABC {
     }
 
     /** Causes the block to fall */
-    public void fall() {
-        ypos++;
+    public Boolean fall(int boardHeight) {
+        if (ypos + farthestFromBlocky < boardHeight - 1) {
+            ypos++;
+        } else {
+            return false;
+        }
+        return true;
     }
 
+    /** The main blockloop where everything is run */
     public void blockLoop(int boardHeight, int boardWidth) {
         getKey();
         switchOrientation();

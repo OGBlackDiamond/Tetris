@@ -9,13 +9,13 @@ public class Main {
     /** The current tick the game runs on. */
     private long tick = 0L;
     /** The array of blocks in the level */
-    private BlockABC[] blocks = {new Lblock()};
+    private BlockABC block = new Lblock();
     /** The board class */
     private Board board;
 
     /** Starts the game with the board dimensions given. */
     public Main(int width, int height) {
-        this.board = new Board(blocks, new int[] {width, height});
+        this.board = new Board(block, new int[] {width, height});
     }
 
     /** Default constructor to start the game with a board 10 x 25. */
@@ -31,23 +31,27 @@ public class Main {
 
     /** Handles all of the action that happens whenever the gameloop runs. */
     public void gameloop() {
-        blocksLoop();
+        // checks if there is a block currently loaded into the level
+        if (block != null) {
+            blocksLoop();
+        }
+
         board.drawBoard();
-        board.zeroBoard();
+        board.zeroBoard(false);
         board.updateBoard();
     }
 
     public void fall() {
-        blocks[0].fall();
+        if (!block.fall(board.boardHeight)) {
+            block = board.deactivateBlock();
+        }
     }
 
     /**
      * Runs the loop for all the blocks present
      */
     private void blocksLoop() {
-        for (BlockABC block: blocks) {
-            block.blockLoop(board.boardHeight, board.boardWidth);
-        }
+        block.blockLoop(board.boardHeight, board.boardWidth);
     }
 
     /**
