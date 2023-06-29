@@ -6,12 +6,13 @@ import TetJava.Blocks.BlockABC;
 
 public class Board {
     /** Dimension variables for the board. */
-    private int boardWidth, boardHeight;
+    public int boardWidth, boardHeight;
     /** Contains the special characters that are used for the corners of the board. */
     private char leftUpperCorner = '┌', leftLowerCorner = '└', rightUpperCorner = '┐', rightLowerCorner = '┘';
-    private int[][] board;
     /** Array for the blocks currently on the screen */
     private BlockABC[] blocks;
+    /** The arry that represents the board. */
+    private int[][] board;
 
     /**
      * Makes a new board with the given paramers

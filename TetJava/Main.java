@@ -46,7 +46,7 @@ public class Main {
      */
     private void blocksLoop() {
         for (BlockABC block: blocks) {
-            block.blockLoop();
+            block.blockLoop(board.boardHeight, board.boardWidth);
         }
     }
 

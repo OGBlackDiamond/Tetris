@@ -18,6 +18,9 @@ public abstract class BlockABC {
     /** This variable will store the last key that was pressed on the keyboard */
     protected int keyPressed;
 
+    /** This will contain the farthest right x coordinate reletive to the block */
+    protected int farthestFromBlock = 0;
+
     /** Returns the last key that was pressed */
     private void getKey() {
         keyPressed = Keylistener.key;
@@ -28,17 +31,32 @@ public abstract class BlockABC {
      * Method is abstract because the position to swtich to depends on the current block.
     */
     private void switchOrientation() {
+        // changes the orientation
         partCoords = keyPressed < 4 ? orientations[keyPressed] : partCoords;
+
+        // every time the orentation is changed, the farthest part from the block is calculated
+        farthestFromBlock = 0;
+        for (int[] part: partCoords) {
+            if (part[1] > farthestFromBlock) {
+                farthestFromBlock = part[1];
+            }
+        }
     }
 
-    private void shift() {
+    private void shift(int boardWidth) {
         switch (keyPressed) {
             case 4:
-                xpos--;
+                if (xpos > 0) {
+                    xpos--;
+                }
                 break;
             case 5:
                 xpos++;
                 break;
+        }
+
+        while (xpos + farthestFromBlock >= boardWidth - 1) {
+            xpos--;
         }
     }
 
@@ -65,10 +83,10 @@ public abstract class BlockABC {
         ypos++;
     }
 
-    public void blockLoop() {
+    public void blockLoop(int boardHeight, int boardWidth) {
         getKey();
         switchOrientation();
-        shift();
+        shift(boardWidth);
         Keylistener.key = 6;
     }
 }
