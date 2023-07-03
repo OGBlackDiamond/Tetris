@@ -4,10 +4,8 @@ package TetJava.Blocks;
 
 L block can be printed in 4 ways:
 
-// default //
 [][][]
 []
-////////////
 
 [][]
   []
@@ -22,7 +20,6 @@ L block can be printed in 4 ways:
 
 */
 public class Lblock extends BlockABC{
-
 
     // constructor
     public Lblock() {
@@ -76,7 +73,7 @@ public class Lblock extends BlockABC{
         this.partCoords = orientations[0];
 
         // sets the starting point for the block
-        this.xpos = 0;
-        this.ypos = 0;
+        this.xpos = 4;
+        this.ypos = -1;
     }
 }

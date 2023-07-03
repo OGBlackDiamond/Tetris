@@ -1,5 +1,6 @@
 package TetJava.Blocks;
 
+import TetJava.Board;
 import TetJava.KeyListener.Keylistener;
 /**
  * This class will be extended by multiple block classes and will act as a framework for all of the block types to run.
@@ -98,8 +99,23 @@ public abstract class BlockABC {
     }
 
     /** Causes the block to fall */
-    public Boolean fall(int boardHeight) {
-        if (ypos + farthestFromBlocky < boardHeight - 1) {
+    public Boolean fall(int boardHeight, Board board) {
+        // variable checking if the block has touched the bottom
+        boolean isNotTouchingBottom = (ypos + farthestFromBlocky < boardHeight - 1);
+        // variable checking if the block will touch a block in the next gameloop
+        boolean willTouchBlock = false;
+
+        // loops through each coordinate in the current orientation
+        for (int[] part: partCoords) {
+            // checks if there is a block under each part of the block
+             willTouchBlock = board.getSpace(
+                xpos + part[1], 
+                // checks below the part if it is not at the bottom layer (it would throw an error if it tried to check for a spot that did not exist)
+                (ypos + part[0] == 24 ? 24: ypos + part[0] + 1));
+        }
+
+        // if the part is not touching the bottom and will not touch a block in the next gameloop, allow it to move down
+        if (isNotTouchingBottom && !willTouchBlock) {
             ypos++;
         } else {
             return false;
@@ -112,6 +128,7 @@ public abstract class BlockABC {
         getKey();
         switchOrientation();
         shift(boardWidth);
+        // set the key to a value that is not being use, so the block does not continue to repeat the same action
         Keylistener.key = 6;
     }
 }

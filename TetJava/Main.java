@@ -5,12 +5,15 @@ author - Caden Feller
 */
 import TetJava.Blocks.*;
 
+/** The main class that acts as a crossroads for everything to intersect. */
 public class Main {
     /** The current tick the game runs on. */
     private long tick = 0L;
-    /** The array of blocks in the level */
+    /** The rate at which the game will tick. */
+    private long tickRate = 999999999L;
+    /** The block currently in the level. */
     private BlockABC block = new Lblock();
-    /** The board class */
+    /** The board class. */
     private Board board;
 
     /** Starts the game with the board dimensions given. */
@@ -29,20 +32,29 @@ public class Main {
         return getTick();
     }
 
-    /** Handles all of the action that happens whenever the gameloop runs. */
+    /** 
+     * Handles all of the action that happens whenever the gameloop runs. 
+     */
     public void gameloop() {
         // checks if there is a block currently loaded into the level
         if (block != null) {
             blocksLoop();
         }
 
+        // runs all functions for the game to run
         board.drawBoard();
         board.zeroBoard(false);
         board.updateBoard();
     }
 
+    /**
+     * Handles the block falling.
+     * Removes the old block from memory and loads in a new one if the block is no longer falling (i.e. touched the ground or another block).
+     */
     public void fall() {
-        if (!block.fall(board.boardHeight)) {
+        // if the block is not allowed to fall anymore, kill it, and create a new block object
+        if (!block.fall(board.boardHeight, board)) {
+            block = null;
             block = board.deactivateBlock();
         }
     }
@@ -60,9 +72,9 @@ public class Main {
      * @return boolean - whether or not the gameloop should run
      */
     private boolean getTick() {
-        if (tick == 999999999L) {
+        if (tick == tickRate) {
             return true;
-        } else if (tick > 999999999L) {
+        } else if (tick > tickRate) {
             tick = 0;
         }
         return false;

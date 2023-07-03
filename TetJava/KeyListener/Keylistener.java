@@ -7,15 +7,21 @@ import TetJava.Main;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/** Static class that handles all of the key input using Jframe */
 public class Keylistener {
+    /** Value to keep track of the key that had been pressed */
     public static int key = 0;
     public static void keylisten (Main tetris) throws Exception {
+        // creates a new Jframe
         JFrame myJFrame = new JFrame();
+
+        // creates a new thread to listen for key input
         myJFrame.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
 
                 int keyCode = e.getKeyCode();
                 key = 6;
+                // assigns each useable key input to a code
                 switch (keyCode) {
                     case KeyEvent.VK_W:
                         key = 0;
