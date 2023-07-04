@@ -8,7 +8,7 @@ In a completely unrelated string of events, I decided that I wanted a 'boilerpla
 Thusly, this repository will conain a folder for each language that I've learned containing a command line interpretation of Tetris written in that language.
 
 ## What a game should look like
-Blocks are represented in groups of pieces ([]), and the board is drawn using dashes (-) and pipes (|) with special characters being used for the corners. Because of this, an average gamestate might look something like this : 
+Blocks are represented in groups of pieces ([]), and the board is drawn using dashes (-) and pipes (|) with special characters being used for the corners. Because of this, an average gamestate might look something like this :
 <br />
 ```
 Score: 0

@@ -1,5 +1,5 @@
 # Tetris - in Java
-This a command line interpretation of Tetris running on Java.
+This a command line interpretation of Tetris running on Java. 846 lines of awesome.
 <br />
 It uses the KeyListener library to continuously get keyboard input while the game is running.
 
@@ -21,7 +21,7 @@ private void clearRow(int row) {
     }
 }
 '''
-The method takes in integer, representing the row to be cleared. A loop will work its way up to that number in increments of one. It will take the current row, minus the value of the loop control variable, and sets it equal to the current row minus the loop control varaible minus one. In this way, the code simply takes the input row, replaces it's value with that of the row above it. In the next loop run, it will do the same thing but with the row above the input row, then the one above that, and the one above that, and will repeat until it has reached the top.
+The method takes in an integer, representing the row to be cleared. A loop will work its way up to that number in increments of one. It will take the current row, minus the value of the loop control variable, and sets it equal to the current row minus the loop control varaible minus one. In this way, the code simply takes the input row, replaces it's value with that of the row above it. In the next loop run, it will do the same thing but with the row above the input row, then the one above that, and the one above that, and will repeat until it has reached the top.
 
 #### The blocks:
 The block is represented by a singular set of coordinate points, which is the top left corner of the block, and an array of coordinate points that represent the positions of the individual pieces of the blocks that make up the block. For example:
