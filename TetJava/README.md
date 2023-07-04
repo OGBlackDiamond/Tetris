@@ -31,7 +31,7 @@ The block is represented by a singular set of coordinate points, which is the to
     {1, 0},
     {2, 0},
     {0, 1}
-},
+}
 ```
 Would equate to :
 ```

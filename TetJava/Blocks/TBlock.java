@@ -2,74 +2,74 @@ package TetJava.Blocks;
 
 /*
 
-Lblock can be printed in 4 ways:
+Tblock can be printed in 4 ways:
 
-[][][]
-[]
-
-[][]
-  []
-  []
-
-    []
-[][][]
-
-[]
 []
 [][]
+[]
+
+[][][]
+  []
+
+  []
+[][][]
+
+[]
+[][]
+[]
 
 */
-public class LBlock extends BlockABC{
+public class TBlock extends BlockABC{
 
     // constructor
-    public LBlock() {
+    public TBlock() {
 
         this.orientations = new int[][][] {
             /*
-            [][][]
+            []
+            [][]
             []
             */
             {
                 {0, 0},
+                {0, 1},
+                {1, 1},
+                {0, 2}
+            },
+            /*
+              []
+            [][]
+              []
+             */
+            {
                 {1, 0},
-                {2, 0},
+                {1, 2},
+                {1, 1},
                 {0, 1}
             },
             /*
-            [][]
               []
+            [][][]
+             */
+            {
+                {1, 0},
+                {0, 1},
+                {1, 1},
+                {2, 1}
+            },
+            /*
+            [][][]
               []
              */
             {
                 {0, 0},
                 {1, 0},
-                {1, 1},
-                {1, 2}
-            },
-            /*
-                []
-            [][][]
-             */
-            {
                 {2, 0},
-                {2, 1},
-                {0, 1},
                 {1, 1}
-            },
-            /*
-            []
-            []
-            [][]
-             */
-            {
-                {0, 0},
-                {0, 1},
-                {0, 2},
-                {1, 2}
             }
         };
 
-        // places the default L shape
+        // places the default T shape
         this.partCoords = orientations[0];
 
         // sets the starting point for the block

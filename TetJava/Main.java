@@ -12,7 +12,7 @@ public class Main {
     /** The rate at which the game will tick. */
     private long tickRate = 999999999L;
     /** The block currently in the level. */
-    private BlockABC block = new Lblock();
+    private BlockABC block = new SBlock();
     /** The board class. */
     private Board board;
 

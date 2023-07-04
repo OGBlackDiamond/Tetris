@@ -3,7 +3,11 @@ package TetJava;
 import static java.lang.System.*;
 
 import TetJava.Blocks.BlockABC;
-import TetJava.Blocks.Lblock;
+import TetJava.Blocks.LBlock;
+import TetJava.Blocks.LineBlock;
+import TetJava.Blocks.SBlock;
+import TetJava.Blocks.SquareBlock;
+import TetJava.Blocks.TBlock;
 
 public class Board {
     /** Dimension variables for the board. */
@@ -12,8 +16,10 @@ public class Board {
     private char leftUpperCorner = '┌', leftLowerCorner = '└', rightUpperCorner = '┐', rightLowerCorner = '┘';
     /** The block currently on the screen */
     private BlockABC block;
-    /** The arry that represents the board. */
+    /** The array that represents the board. */
     private Space[][] board;
+    /** Value that represents the players score */
+    private int score = 0;
 
     /**
      * Makes a new board with the given paramers
@@ -65,6 +71,8 @@ public class Board {
 
     /** Draws the board */
     public void drawBoard () {
+        // prints the players score
+        out.println("Score: " + score);
         // prints the top layer
         out.print(leftUpperCorner); for (int i = 0; i <= boardWidth - 2; i++) { out.print("--"); } out.println(rightUpperCorner);
         // prints middle layers
@@ -85,6 +93,7 @@ public class Board {
             // checks if a row has been completely filled, if it has, clear the row
             if (spacesFilled == 9) {
                 clearRow(rows);
+                score++;
             }
         }
         // prints bottom layer
@@ -145,7 +154,7 @@ public class Board {
      */
     public BlockABC deactivateBlock() {
         mapAdjacentPieces(block, block.getCoords(), true);
-        block = new Lblock();
+        block = generateNewBlock();
         return block;
     }
 
@@ -164,6 +173,24 @@ public class Board {
         board[0] = new Space[boardWidth];
         for (int i = 0; i < boardWidth; i++) {
             board[0][i] = new Space();
+        }
+    }
+
+    private BlockABC generateNewBlock() {
+        int blockType = (int) (Math.random() * 5);
+        switch (blockType) {
+            case 0:
+                return new LBlock();
+            case 1:
+                return new TBlock();
+            case 2:
+                return new SquareBlock();
+            case 3:
+                return new LineBlock();
+            case 4:
+                return new SBlock();
+            default:
+                return new LBlock();
         }
     }
 }
