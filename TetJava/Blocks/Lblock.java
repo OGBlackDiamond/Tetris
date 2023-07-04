@@ -25,7 +25,7 @@ public class Lblock extends BlockABC{
     public Lblock() {
 
         this.orientations = new int[][][] {
-            /* default orientation
+            /*
             [][][]
             []
             */
