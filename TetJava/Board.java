@@ -2,12 +2,7 @@ package TetJava;
 
 import static java.lang.System.*;
 
-import TetJava.Blocks.BlockABC;
-import TetJava.Blocks.LBlock;
-import TetJava.Blocks.LineBlock;
-import TetJava.Blocks.SBlock;
-import TetJava.Blocks.SquareBlock;
-import TetJava.Blocks.TBlock;
+import TetJava.Blocks.*;
 
 public class Board {
     /** Dimension variables for the board. */
