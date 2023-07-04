@@ -13,14 +13,14 @@ The board is represented as a 2D array, where the first dimension is the amount 
 During each gameloop the board will look at the 'block' object that it was passed by the 'Main' class. It checks where the block exists on the board, and then marks each space where a piece of a block resides, as active. In order to draw this, the board class simply checks for whether a space is occupied or not (using the '.isActive' attribute). If the space is active, draw a box ([]) there. If it isn't, draw a space (  ) there. After it has been drawn, it will check if the block will hit another block in the next gameloop, or is touching the ground. If either of these are true, a block will be deactivated, meaning that it will no longer be moved. This is done by setting all of the spaces where the block resides to 'shouldClear = false;'. This means that those blocks will not be cleared, whenever the slate is wiped clean. (I had to do this because whenever a block is moving, the spaces where is was need to be cleared so that it does not leave a trail where it was. You can think of each space as a light switch. It can be turned on and off depending on what needs to happen. Whenever a gameloop is called, the 'zeroBoard()' method will come and flick all of the switches to off, and the board will flick certain ones back on where a block is. The 'shouldClear' attribute essentially acts as a little piece of tape holding the switch in the up position. When 'shouldClear' is true, the 'zeroBoard()' method will not turn that switch off.) By doing this, the pieces where the block is, will stay there, even if the block is no longer there. This allows me to destroy the current block obect, and create a new one to progress the game. This method is also helpful because the parts of a block are no longer attached to eachother, or the block, in any way. This allows me to be able to remove layers very easily because I don't have to worry about slicing a block in half.
 <br /> <br />
 Whenever a row needs to be cleared, I use a simple loop and shift each layer (starting at the row that needs to me moved) down by one. This works simply by setting the row at the current index, to the value of the row preceeding the current index. Its quite a simple piece of code:
-'''
+```
 private void clearRow(int row) {
     // shifts the entire board down one level
     for (int i = 0; i < row; i++) {
         board[row - i] = board[row - i - 1];
     }
 }
-'''
+```
 The method takes in an integer, representing the row to be cleared. A loop will work its way up to that number in increments of one. It will take the current row, minus the value of the loop control variable, and sets it equal to the current row minus the loop control varaible minus one. In this way, the code simply takes the input row, replaces it's value with that of the row above it. In the next loop run, it will do the same thing but with the row above the input row, then the one above that, and the one above that, and will repeat until it has reached the top.
 
 #### The blocks:
