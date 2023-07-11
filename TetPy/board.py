@@ -1,4 +1,4 @@
-import Blocks.block
+import Blocks.block_abc
 class Board:
     def __init__(self, width, height, block):
         # the board dimensions
@@ -77,8 +77,7 @@ class Board:
         self.draw_board()
 
 
-
 class Space:
     def __init__(self):
-        self.is_active = False;
-        self.should_clear = True;
+        self.is_active = False
+        self.should_clear = True

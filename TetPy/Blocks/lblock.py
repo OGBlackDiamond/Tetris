@@ -1,6 +1,6 @@
-from Blocks.block import Block
+from Blocks.block_abc import Block_ABC
 
-class Lblock(Block):
+class Lblock(Block_ABC):
     
     def __init__(self):
         self.xpos = 3

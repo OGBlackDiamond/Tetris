@@ -13,11 +13,16 @@ pygame.display.set_caption("Tetris Window")
 
 class Main:
     def __init__(self):
+        # makes a new block
         self.block = Lblock()
+        # makes the board
         self.board = board.Board(10, 25, self.block)
 
+        # current timer variable
         self.timer = 0
-        self.ticker = False
+
+        # the last key that was pressed
+        self.key_pressed = ""
 
 
     def main(self):
@@ -25,7 +30,6 @@ class Main:
         clock = pygame.time.Clock()
         clock.tick(TPS)
         self.timer += 1
-
 
         self.always_loop()
 
@@ -41,35 +45,42 @@ class Main:
     # will always be run 
     def always_loop(self):
         self.get_key_pressed()
-    
+
     # will only run when the game ticks
     def tick_loop(self):
         # stuff to be run every tick
         self.board.board_loop()
-
+        self.block.take_action(self.key_pressed)
+        self.key_pressed = ""
 
 
     def get_key_pressed(self):
         # doing all of the player input handling
         keys_pressed = pygame.key.get_pressed()
+
+        # handles all of the different keypresses
         if keys_pressed[pygame.K_LEFT]:
-            self.block.xpos -= 1
-            self.board.board_loop()
-            self.ticker = True
+            self.key_pressed = "left"
+
         if keys_pressed[pygame.K_RIGHT]:
-            self.block.xpos += 1
-            self.board.board_loop()
-            self.ticker = True
+            self.key_pressed = "right"
+
         if keys_pressed[pygame.K_w]:
-            pass
+            self.key_pressed = "w"
+
         elif keys_pressed[pygame.K_a]:
-            pass
+            self.key_pressed = "a"
+
         elif keys_pressed[pygame.K_s]:
-            pass
+            self.key_pressed = "s"
+
         elif keys_pressed[pygame.K_d]:
-            pass
+            self.key_pressed = "d"
+
         else:
             return
+
+        self.board.board_loop()
 
 
 balls = Main()
