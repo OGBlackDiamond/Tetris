@@ -1,4 +1,3 @@
-import Blocks.block_abc
 class Board:
     def __init__(self, width, height, block):
         # the board dimensions
@@ -72,9 +71,9 @@ class Board:
                 self.board[part[1] + block_coords[1]][part[0] + block_coords[0]].should_clear = False
 
     def board_loop(self):
+        self.draw_board()
         self.zero_board()
         self.update_board()
-        self.draw_board()
 
 
 class Space:

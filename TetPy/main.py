@@ -33,14 +33,25 @@ class Main:
 
         self.always_loop()
 
+        # ticks game every 1 second
         if self.timer == 60:
             self.tick_loop()
             self.timer = 0
 
-        # handles exiting the game
-        for event in pygame.event.get():
+        events = pygame.event.get()
+
+        # handles the game events
+        for event in events:
+            # if a key is pressed, update the blocks position and allow it to move
+            if event.type == pygame.KEYDOWN:
+                self.block.take_action(self.key_pressed)
+                self.key_pressed = ""
+                self.board.board_loop()
+
+            # kills the program if the pygame window closes
             if event.type == pygame.QUIT:
                 return
+
 
     # will always be run 
     def always_loop(self):
@@ -50,9 +61,7 @@ class Main:
     def tick_loop(self):
         # stuff to be run every tick
         self.board.board_loop()
-        self.block.take_action(self.key_pressed)
-        self.key_pressed = ""
-
+        self.block.fall()
 
     def get_key_pressed(self):
         # doing all of the player input handling
@@ -62,7 +71,7 @@ class Main:
         if keys_pressed[pygame.K_LEFT]:
             self.key_pressed = "left"
 
-        if keys_pressed[pygame.K_RIGHT]:
+        elif keys_pressed[pygame.K_RIGHT]:
             self.key_pressed = "right"
 
         if keys_pressed[pygame.K_w]:
@@ -76,12 +85,6 @@ class Main:
 
         elif keys_pressed[pygame.K_d]:
             self.key_pressed = "d"
-
-        else:
-            return
-
-        self.board.board_loop()
-
 
 balls = Main()
 while running:

@@ -18,10 +18,10 @@ class Block_ABC:
     def take_action(self, action):
         # takes the action based on the input
         if action == "left":
-            self.xpos -= 1
+            self.move_left()
 
         elif action == "right":
-            self.xpos += 1
+            self.move_right()
 
         elif action == "w":
             self.part_coords = self.orientations[0]
@@ -34,3 +34,17 @@ class Block_ABC:
 
         elif action == "d":
             self.part_coords = self.orientations[3]
+
+
+    def move_left(self):
+        self.xpos -= 1
+
+        if self.xpos < 0:
+            self.xpos += 1
+
+    def move_right(self):
+        self.xpos += 1
+
+        for piece in self.part_coords:
+            if (self.xpos + piece[0]) >= 9:
+                self.xpos -= 1
