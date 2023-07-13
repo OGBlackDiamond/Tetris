@@ -1,3 +1,7 @@
+import Blocks
+
+import random
+
 class Board:
     def __init__(self, width, height, block):
         # the board dimensions
@@ -43,13 +47,18 @@ class Board:
         # prints the middle layers
         for row in range(self.height):
             print("|", end="")
+            spaces_filled = 0
             for column in range(self.width - 1):
                 # if the selected space is occupied, draw a square, if it isn't, draw a space
                 if self.board[row][column].is_active:
                     print("[]", end="")
+                    spaces_filled += 1
                 else:
                     print("  ", end="")
             print("|")
+            if spaces_filled == self.width - 1:
+                self.clear_row(row)
+                self.score += 1
         # print the top layer
         print(f"{self.left_lower_corner}" + ("--" * (self.width - 1)) + f"{self.right_lower_corner}")
 
@@ -69,6 +78,29 @@ class Board:
             self.board[part[1] + block_coords[1]][part[0] + block_coords[0]].is_active = True
             if deactivate:
                 self.board[part[1] + block_coords[1]][part[0] + block_coords[0]].should_clear = False
+
+    def deactivate_block(self):
+        self.map_adjacent_pieces(self.block.get_coords(), True)
+        self.block = self.generate_new_block()
+        return self.block
+
+    def generate_new_block(self):
+        gen_block = random.randint(0, 0)
+
+        if gen_block == 0:
+            return Blocks.lblock.Lblock(self.width, self.height)
+
+    def get_space(self, xcoord, ycoord):
+        return self.board[ycoord][xcoord].is_active and not self.board[ycoord][xcoord].should_clear
+    
+    def clear_row(self, row):
+        for space in self.board[row]:
+            space.is_active = False
+            space.should_clear = True
+
+        # saves the row, but takes it out of the array
+        new_row = self.board.pop(row)
+        self.board.insert(0, new_row)
 
     def board_loop(self):
         self.draw_board()

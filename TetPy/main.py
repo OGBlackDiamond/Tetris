@@ -14,7 +14,7 @@ pygame.display.set_caption("Tetris Window")
 class Main:
     def __init__(self):
         # makes a new block
-        self.block = Lblock()
+        self.block = Lblock(10, 25)
         # makes the board
         self.board = board.Board(10, 25, self.block)
 
@@ -44,9 +44,7 @@ class Main:
         for event in events:
             # if a key is pressed, update the blocks position and allow it to move
             if event.type == pygame.KEYDOWN:
-                self.block.take_action(self.key_pressed)
-                self.key_pressed = ""
-                self.board.board_loop()
+                self.key_press_loop()
 
             # kills the program if the pygame window closes
             if event.type == pygame.QUIT:
@@ -56,12 +54,23 @@ class Main:
     # will always be run 
     def always_loop(self):
         self.get_key_pressed()
-
+ 
     # will only run when the game ticks
     def tick_loop(self):
         # stuff to be run every tick
         self.board.board_loop()
-        self.block.fall()
+        self.fall()
+
+    # will run when a key is pressed
+    def key_press_loop(self):
+        # gets the current keypress
+        self.get_key_pressed()
+        # allows the block to take an action
+        self.block.take_action(self.key_pressed)
+        # runs a board loop to update the graphics with the new action
+        self.board.board_loop()
+        # clears the current keypress
+        self.key_pressed = ""
 
     def get_key_pressed(self):
         # doing all of the player input handling
@@ -85,6 +94,10 @@ class Main:
 
         elif keys_pressed[pygame.K_d]:
             self.key_pressed = "d"
+
+    def fall(self):
+        if (not self.block.fall(self.board)):
+            self.block = self.board.deactivate_block()
 
 balls = Main()
 while running:

@@ -86,7 +86,7 @@ public class Board {
             }
             out.println("|");
             // checks if a row has been completely filled, if it has, clear the row
-            if (spacesFilled == 9) {
+            if (spacesFilled == boardWidth - 1) {
                 clearRow(rows);
                 score++;
             }
