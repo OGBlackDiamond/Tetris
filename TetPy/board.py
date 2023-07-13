@@ -1,6 +1,10 @@
-import Blocks
-
 import random
+
+from Blocks.line_block import Line_Block
+from Blocks.lblock import Lblock
+from Blocks.sblock import Sblock
+from Blocks.square_block import Square_Block
+from Blocks.tblock import Tblock
 
 class Board:
     def __init__(self, width, height, block):
@@ -85,10 +89,18 @@ class Board:
         return self.block
 
     def generate_new_block(self):
-        gen_block = random.randint(0, 0)
+        gen_block = random.randint(0, 4)
 
         if gen_block == 0:
-            return Blocks.lblock.Lblock(self.width, self.height)
+            return Lblock(self.width, self.height)
+        elif gen_block == 1:
+            return Line_Block(self.width, self.height)
+        elif gen_block == 2:
+            return Sblock(self.width, self.height)
+        elif gen_block == 3:
+            return Square_Block(self.width, self.height)
+        elif gen_block == 4:
+            return Tblock(self.width, self.height)
 
     def get_space(self, xcoord, ycoord):
         return self.board[ycoord][xcoord].is_active and not self.board[ycoord][xcoord].should_clear
