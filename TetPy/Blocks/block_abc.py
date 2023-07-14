@@ -1,8 +1,10 @@
+# This class will be extended by multiple block classes and will act as a framework for all of the block types to run.
 class Block_ABC:
 
     def __init__(self, board_width, board_height):
-        self.xpos = 0
-        self.ypos = 0
+        # defines all of the class variables
+        self.xpos = -1
+        self.ypos = -1
         self.part_coords = [[]]
         self.orientations = [[[]]]
 
@@ -12,12 +14,15 @@ class Block_ABC:
         self.farthest_from_block_x = 0
         self.farthest_from_block_y = 0
 
+    # returns the current coordinates of the block
     def get_coords(self):
         return [self.xpos, self.ypos]
 
+    # returns the list of coordinate points that make up the block's current shape
     def get_adjacent_coords(self):
         return self.part_coords
 
+    # takes an action based on an input
     def take_action(self, action):
         # takes the action based on the input
         if action == "left":
@@ -50,6 +55,7 @@ class Block_ABC:
             if part[1] > self.farthest_from_block_y:
                 self.farthest_from_block_y = part[1];
 
+    # attempts to move the block down one space
     def fall(self, board):
         # variable checking if the block has touched the bottom
         is_not_touching_bottom = (self.ypos + self.farthest_from_block_y < self.board_height - 1);
@@ -80,15 +86,18 @@ class Block_ABC:
         else:
             return False
 
+    # the logic to attempt to move the block left
     def move_left(self):
         self.xpos -= 1
 
         if self.xpos < 0:
             self.xpos += 1
 
+    # the logic to attempt to move the block left
     def move_right(self):
         self.xpos += 1
 
+        # checks each individual piece to see if it has gone out of bounds
         for piece in self.part_coords:
             if (self.xpos + piece[0]) >= self.board_width - 1:
                 self.xpos -= 1

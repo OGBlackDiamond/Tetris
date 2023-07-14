@@ -12,6 +12,7 @@ WIN = pygame.display.set_mode((1, 1))
 pygame.display.set_caption("Tetris Window")
 
 class Main:
+    
     def __init__(self):
         # makes a new block
         self.block = Lblock(10, 25)
@@ -31,6 +32,7 @@ class Main:
         clock.tick(TPS)
         self.timer += 1
 
+        # runs 60 times every second
         self.always_loop()
 
         # ticks game every 1 second
@@ -72,6 +74,7 @@ class Main:
         # clears the current keypress
         self.key_pressed = ""
 
+    # get the key that has been pressed
     def get_key_pressed(self):
         # doing all of the player input handling
         keys_pressed = pygame.key.get_pressed()
@@ -95,6 +98,7 @@ class Main:
         elif keys_pressed[pygame.K_d]:
             self.key_pressed = "d"
 
+    # checks if the block is allowed to fall, if it isn't, stop it and spawn a new one
     def fall(self):
         if (not self.block.fall(self.board)):
             self.block = self.board.deactivate_block()
