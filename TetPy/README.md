@@ -5,7 +5,8 @@ To install all dependencies (at the time of writing this, there is only one), ru
 ```
 pip install -r TetPy/dependencies.txt
 ```
-This version uses the Pygame library to continuously get keyboard input while the game is running.
+This version uses the Pygame library to continuously get keyboard input while the game is running.<br />
+YOU MUST HAVE THE Pygame WINDOW AS YOUR ACTIVE TAB OR THE KEYBOARD INPUT WILL NOT WORK.
 
 ## How it works - Disclaimer
 This version largely mirrors the original implementation (TetJava) in the way that it runs, making use of Python's Object Orientability to mirror the Java implimentation almost 1 for 1. The way I did it in Java makes the most sense to me, so the only differences you will see are minor conviniences that python allows for, (i.e. the list.pop() method).
