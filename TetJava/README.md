@@ -2,7 +2,9 @@
 This a command line interpretation of Tetris running on Java.<br />
 
 It uses the KeyListener library to continuously get keyboard input while the game is running.<br />
-YOU MUST HAVE THE Keylistener WINDOW AS YOUR ACTIVE TAB OR THE KEYBOARD INPUT WILL NOT WORK.
+YOU MUST HAVE THE Keylistener WINDOW AS YOUR ACTIVE TAB OR THE KEYBOARD INPUT WILL NOT WORK.<br />
+### Controls:
+The block uses the left and right arrow keys to move left and right. It uses WASD to change orientations, each key corresponds to a block position.
 
 ## How it works - Overview
 Because Java is an object oriented language, I made heavy use of classes when writing this version. There was a main class that handled the gameloop and everything else as a whole. I used an abstract class to act as a template for all block classes to inherit from, this allowed me to use a range of different blocks, without having to change the variable type (the variable type is BlockABC, the abstract class. All classes that inherit from the abstract class automatically get applied this subtype, so they can all be assigned to a 'BlockABC' variable). The board class handles all of the action requiring the board, this includes drawing, updating, removing, shifting, etc. The runner simply starts the game.

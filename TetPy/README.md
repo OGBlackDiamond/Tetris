@@ -6,7 +6,9 @@ To install all dependencies (at the time of writing this, there is only one), ru
 pip install -r TetPy/dependencies.txt
 ```
 This version uses the Pygame library to continuously get keyboard input while the game is running.<br />
-YOU MUST HAVE THE Pygame WINDOW AS YOUR ACTIVE TAB OR THE KEYBOARD INPUT WILL NOT WORK.
+YOU MUST HAVE THE Pygame WINDOW AS YOUR ACTIVE TAB OR THE KEYBOARD INPUT WILL NOT WORK.<br />
+### Controls:
+The block uses the left and right arrow keys to move left and right. It uses WASD to change orientations, each key corresponds to a block position.
 
 ## How it works - Disclaimer
 This version largely mirrors the original implementation (TetJava) in the way that it runs, making use of Python's Object Orientability to mirror the Java implimentation almost 1 for 1. The way I did it in Java makes the most sense to me, so the only differences you will see are minor conviniences that python allows for, (i.e. the list.pop() method).
