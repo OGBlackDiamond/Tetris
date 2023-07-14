@@ -1,5 +1,5 @@
 # Tetris - in Python
-This a command line interpretation of Tetris running on Python. 501 lines of awesome.
+This a command line interpretation of Tetris running on Python.
 <br /> <br />
 To install all dependencies (at the time of writing this, there is only one), run the following command: <br />
 ```
