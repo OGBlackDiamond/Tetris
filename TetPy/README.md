@@ -14,7 +14,7 @@ The block uses the left and right arrow keys to move left and right. It uses WAS
 This version largely mirrors the original implementation (TetJava) in the way that it runs, making use of Python's Object Orientability to mirror the Java implimentation almost 1 for 1. The way I did it in Java makes the most sense to me, so the only differences you will see are minor conviniences that python allows for, (i.e. the list.pop() method).
 
 ## How it works - Overview
-Because Java is an object oriented language, I made heavy use of classes when writing this version. There was a main class that handled the gameloop and everything else as a whole. I used a class to act as a template for all block classes to inherit from, this allowed me to use a range of different blocks without having to copy and pase the same methods into each class. The board class handles all of the action requiring the board, this includes drawing, updating, removing, shifting, etc.
+Because Python has object oriented language capabilities, I made heavy use of classes when writing this version. There was a main class that handled the gameloop and everything else as a whole. I used a class to act as a template for all block classes to inherit from, this allowed me to use a range of different blocks without having to copy and pase the same methods into each class. The board class handles all of the action requiring the board, this includes drawing, updating, removing, shifting, etc.
 
 ## How it works - Deep Dive
 ### The board:
