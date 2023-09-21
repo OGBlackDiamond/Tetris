@@ -1,4 +1,6 @@
 package TetJava.Blocks;
+import TetJava.Board;
+
 
 /*
 
@@ -22,8 +24,8 @@ Lblock can be printed in 4 ways:
 public class LBlock extends BlockABC{
 
     // constructor
-    public LBlock() {
-
+    public LBlock(Board board) {
+        super(board);
         this.orientations = new int[][][] {
             /*
             [][][]

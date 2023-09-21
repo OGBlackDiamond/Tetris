@@ -6,7 +6,7 @@ import TetJava.KeyListener.Keylistener;
  * This class will be extended by multiple block classes and will act as a framework for all of the block types to run.
  * This does not have a constructor, as it is an abstract class.
  */
-public abstract class BlockABC {
+public class BlockABC {
     /** This variable contains a coordinate value for the block relative to the board */
     protected int xpos, ypos;
 
@@ -25,6 +25,12 @@ public abstract class BlockABC {
     /** This will contain the farthest right y coordinate reletive to the block */
     protected int farthestFromBlocky = 0;
 
+    /** This will hold the current board instance */
+    protected Board board;
+
+    public BlockABC(Board board) {
+        this.board = board;
+    }
 
     /** Returns the last key that was pressed */
     private void getKey() {
@@ -35,7 +41,10 @@ public abstract class BlockABC {
     private void switchOrientation() {
         // changes the orientation
         partCoords = keyPressed < 4 ? orientations[keyPressed] : partCoords;
+        updateFarthestFrom();
+    }
 
+    private void updateFarthestFrom() {
         // every time the orentation is changed, the farthest part from the block is calculated on the x axis
         farthestFromBlockx = 0;
         for (int[] part: partCoords) {
@@ -67,6 +76,9 @@ public abstract class BlockABC {
             case 5:
                 xpos++;
                 break;
+            case 6:
+                System.out.println("Slammin!");
+                slam();
         }
 
         // constantly shoves the piece back into the board if it is out of bounds
@@ -99,9 +111,9 @@ public abstract class BlockABC {
     }
 
     /** Causes the block to fall */
-    public Boolean fall(int boardHeight, Board board) {
+    public Boolean fall() {
         // variable checking if the block has touched the bottom
-        boolean isNotTouchingBottom = (ypos + farthestFromBlocky < boardHeight - 1);
+        boolean isNotTouchingBottom = (ypos + farthestFromBlocky < board.boardHeight - 1);
         // variable checking if the block will touch a block in the next gameloop
         boolean willTouchBlock = false;
 
@@ -123,12 +135,18 @@ public abstract class BlockABC {
         return true;
     }
 
+    public void slam() {
+        while (fall()) {
+            updateFarthestFrom();
+        };
+    }
+
     /** The main blockloop where everything is run */
     public void blockLoop(int boardHeight, int boardWidth) {
         getKey();
         switchOrientation();
         shift(boardWidth);
         // set the key to a value that is not being use, so the block does not continue to repeat the same action
-        Keylistener.key = 6;
+        Keylistener.key = 7;
     }
 }

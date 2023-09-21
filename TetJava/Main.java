@@ -11,14 +11,16 @@ public class Main {
     private long tick = 0L;
     /** The rate at which the game will tick. */
     private long tickRate = 999999999L;
-    /** The block currently in the level. */
-    private BlockABC block = new SBlock();
     /** The board class. */
     private Board board;
+    /** The block currently in the level. */
+    private BlockABC block;
 
     /** Starts the game with the board dimensions given. */
     public Main(int width, int height) {
-        this.board = new Board(block, new int[] {width, height});
+        this.board = new Board(new int[] {width, height});
+        this.block = new SBlock(board);
+        board.setBlock(block);
     }
 
     /** Default constructor to start the game with a board 10 x 25. */
@@ -53,7 +55,7 @@ public class Main {
      */
     public void fall() {
         // if the block is not allowed to fall anymore, kill it, and create a new block object
-        if (!block.fall(board.boardHeight, board)) {
+        if (!block.fall()) {
             block = null;
             block = board.deactivateBlock();
         }

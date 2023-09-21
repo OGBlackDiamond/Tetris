@@ -1,5 +1,5 @@
 package TetJava.Blocks;
-
+import TetJava.Board;
 /*
 
 Sblock can be printed in 2 ways:
@@ -15,8 +15,8 @@ Sblock can be printed in 2 ways:
 public class SBlock extends BlockABC{
 
     // constructor
-    public SBlock() {
-
+    public SBlock(Board board) {
+        super(board);
         this.orientations = new int[][][] {
             /*
             []

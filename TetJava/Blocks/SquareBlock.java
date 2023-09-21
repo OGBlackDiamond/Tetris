@@ -1,5 +1,5 @@
 package TetJava.Blocks;
-
+import TetJava.Board;
 /*
 
 SquareBlock can be printed in 1 way:
@@ -11,8 +11,8 @@ SquareBlock can be printed in 1 way:
 public class SquareBlock extends BlockABC{
 
     // constructor
-    public SquareBlock() {
-
+    public SquareBlock(Board board) {
+        super(board);
         this.orientations = new int[][][] {
             /*
             [][]

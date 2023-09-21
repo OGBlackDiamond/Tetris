@@ -1,5 +1,5 @@
 package TetJava.Blocks;
-
+import TetJava.Board;
 /*
 
 LineBlock can be printed in 2 ways:
@@ -15,8 +15,8 @@ LineBlock can be printed in 2 ways:
 public class LineBlock extends BlockABC{
 
     // constructor
-    public LineBlock() {
-
+    public LineBlock(Board board) {
+        super(board);
         this.orientations = new int[][][] {
             /*
             [][][][]

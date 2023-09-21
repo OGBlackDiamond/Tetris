@@ -16,6 +16,17 @@ public class Board {
     /** Value that represents the players score */
     private int score = 0;
 
+
+    /**
+     * Makes a new board with the given paramers, and an empty block value
+     *
+     * @param blocks - the array of blocks to be drawn
+     * @param dimensions - the size of the board, {height, width}
+     */
+    public Board(int[] dimensions) {
+        this(null, dimensions);
+    }
+
     /**
      * Makes a new board with the given paramers
      *
@@ -29,6 +40,14 @@ public class Board {
         this.board = new Space[boardHeight][boardWidth];
         zeroBoard(true);
     }
+
+    /**
+     * sets the block value
+     */
+    public void setBlock(BlockABC block) {
+        this.block = block;
+    }
+
 
     /**
      * Returns the board to a state of zero.
@@ -175,17 +194,17 @@ public class Board {
         int blockType = (int) (Math.random() * 5);
         switch (blockType) {
             case 0:
-                return new LBlock();
+                return new LBlock(this);
             case 1:
-                return new TBlock();
+                return new TBlock(this);
             case 2:
-                return new SquareBlock();
+                return new SquareBlock(this);
             case 3:
-                return new LineBlock();
+                return new LineBlock(this);
             case 4:
-                return new SBlock();
+                return new SBlock(this);
             default:
-                return new LBlock();
+                return new LBlock(this);
         }
     }
 }

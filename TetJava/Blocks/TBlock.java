@@ -1,5 +1,5 @@
 package TetJava.Blocks;
-
+import TetJava.Board;
 /*
 
 Tblock can be printed in 4 ways:
@@ -22,8 +22,8 @@ Tblock can be printed in 4 ways:
 public class TBlock extends BlockABC{
 
     // constructor
-    public TBlock() {
-
+    public TBlock(Board board) {
+        super(board);
         this.orientations = new int[][][] {
             /*
             []

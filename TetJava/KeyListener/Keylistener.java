@@ -41,8 +41,11 @@ public class Keylistener {
                     case KeyEvent.VK_RIGHT:
                         key = 5;
                         break;
-                    default:
+                    case KeyEvent.VK_DOWN:
                         key = 6;
+                        break;
+                    default:
+                        key = 7;
                         break;
                 }
                 getKey(key);
